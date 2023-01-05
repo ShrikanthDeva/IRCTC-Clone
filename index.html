@@ -18,8 +18,8 @@
                 <div class="nav-items">
                     <img class="logo" src="img/logo.png" alt="app-logo" height="75px">
                     <a class="nav-item" href="">Check Status</a>
-                    <a class="nav-item" href="">Book Train</a>
                     <a class="nav-item" href="">Cancel Train</a>
+                    <a class="nav-item" href="">Contact Us</a>
                     <a class="nav-item btn" href="./auth/login.html">Login</a >
                     <a class="nav-item btn">Register</a>
                 </div>
@@ -46,9 +46,9 @@
                         </div>
                         
                         <!-- switch icon -->
-                        <div class="switch-icon">
-                            <i class="fa-solid fa-up-down"></i>
-                        </div>
+                        <!-- <div class="switch-icon"> -->
+                            <img id="switch_inputs" class="switch-icon" src="img/swap.png"  alt="">
+                        <!-- </div> -->
                     
                         
                         <!-- To -->
@@ -106,7 +106,7 @@
 
                         <!-- Available berth check box -->
                         <div class="check-box">
-                            <input type="checkbox" id="AvailableTrain"  name="AvailableTrain" value="available" checked=false>
+                            <input type="checkbox" id="AvailableTrain"  name="AvailableTrain" value="yes" checked=false>
                             <label for="AvailableTrain">Train with Available Berth</label>
                         </div>
                         
@@ -116,12 +116,22 @@
 
 
                 <!-- submit -->
-                <div class="input-icons-container-6">
-                    <div class="search-icon">
-                        <i class="fa-solid fa-magnifying-glass fa-l"></i>
+                <!-- <div class="input-icons-container-6">
+                    <div  class="search-icon">
+                        <i id="search-icon" class="fa-solid fa-magnifying-glass fa-l"></i>
                     </div>                    
-                    <button class="search-btn btn" type="submit" onclick="json_serialize()">Search</button>    
+                    <button id="search-btn" class="search-btn btn" type="submit">Search</button>    
+                </div> -->
+
+                <div class="search-asif">
+                    
+                    <div class="button-asif">
+                        <i id="search-icon" class="fa-solid fa-magnifying-glass fa-l"></i>
+                        <p>Submit</p>
+                    </div>                    
                 </div>
+
+                
         
 
             </div>

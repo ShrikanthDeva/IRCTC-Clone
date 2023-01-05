@@ -30,11 +30,12 @@ img {
     border-top: none;
     position: fixed;
     top: 0;
-    left: 10%;
-    right: 10%;
+    left: 15%;
+    right: 15%;
     font-size: 1.125rem; 
     line-height: 1.75rem;
     z-index: 100;
+    padding: 15px 0px;
 }
 
 
@@ -79,7 +80,8 @@ img {
     height: 10px;
 }    
 .btn:hover{
-    opacity: 0.95;
+    opacity: 90%;
+    /* color: black; */
 }
 
 
@@ -98,6 +100,30 @@ img {
     margin: auto 0px;
     align-items: center;
 }
+.search-asif {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-asif {
+    background-color: rgb(49 46 129);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    column-gap: 10px;
+    /* align-items: center; */
+}
+
+.button-asif:hover {
+    opacity: 90%;
+    border-bottom: 1px;
+}
+
+#search-icon {
+    padding-top: 4px;
+    height: 2px;
+}
 
 .nav-item {
     display: flex;
@@ -112,7 +138,8 @@ img {
 }
 .nav-item:hover {
     border-bottom: 0px;
-    color: black;
+    /* color: black; */
+    opacity: 90%;
     cursor: pointer;
 }
 
@@ -285,7 +312,9 @@ img {
 }
 .switch-icon
 {
-    margin-left: 100px;
+    margin-left: 90px;
+    height: 20px;
+    width: 20px;
 }
 .input-icons-container-1
 {
@@ -345,15 +374,17 @@ img {
 }
 .input-icons-container-6
 {
-    width: 100px;
-    display: flex;
-    flex-direction: row;
+    width: 10px;
     align-items: center;
     position: relative;
     margin:0 auto;
-    padding-right: 30px;
+    padding-right: 10px;
 }
-
+.input-icons-container-6:hover
+{
+    /* color: black; */
+    background-color: aliceblue
+}
 
 .select-container
 {
@@ -394,15 +425,50 @@ img {
 {
 
     position: absolute;
-    left:15px;
-    color: black;
+    left:25px;
+    color: white;
+    height: 10px;
+    width: 100px;
+    padding-top: 10px;
+    /* z-index: 100; */
 
 }
+/* .search-icon:hover
+{
+    color: black;
+} */
 .search-btn
 {
     height: 40px;
-    width: 250px;
+    width: 150px;
     padding-left: 25px;
     border-bottom: 0px;
-    color: black;
+    color: white;
+    background-color: rgb(49 46 129);
+    color: white;
+    
+
+    /* padding: 5px 10px;  */
+    /* border-width: 2px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(49 46 129);
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px 6px;
+
+    font-size: 1.125rem; 
+    line-height: 1.75rem; */
+    /* height: 10px; */
+}    
+.search-btn-container
+{
+    width: 10px;
+    align-items: center;
+    position: relative;
+    margin:0 auto;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
 }

@@ -116,31 +116,37 @@ const addSubmitButton = () => {
     document.getElementById('button-container').classList.add('justify-space-between')
 }
 
-document.getElementById('Next').addEventListener('click', nextPage)
+
 
 
 // details page js
 
 // min date fixer for calender
-datePickerId.min = new Date().toISOString().split("T")[0];
+var date_pick = document.getElementById("datePickerId")
+if (date_pick)
+{
+    datePickerId.min = new Date().toISOString().split("T")[0];
+    document.getElementById("datePickerId").valueAsDate = new Date()
+}
+
 
 // form to json serialize
 function json_serialize()
 {
 
     let form_result = {}
-    form_result.From = document.getElementById("From").value;    
-    form_result.To = document.getElementById("To").value;    
-    form_result.TicketType = document.getElementById("TicketType").value;    
-    form_result.TicketClass = document.getElementById("TicketClass").value;    
-    form_result.datePickerId = document.getElementById("datePickerId").value;  
+    form_result.trainfrom = document.getElementById("From").value;    
+    form_result.trainto = document.getElementById("To").value;    
+    form_result.type = document.getElementById("TicketType").value;    
+    form_result.class = document.getElementById("TicketClass").value;    
+    form_result.date = document.getElementById("datePickerId").value;  
     if (document.getElementById("AvailableTrain").checked)  
     {
-        form_result.AvailableTrain = document.getElementById("AvailableTrain").value;  
+        form_result.trainavailable = document.getElementById("AvailableTrain").value;  
     }
     else
     {
-        form_result.AvailableTrain = "not available";
+        form_result.AvailableTrain = "no";
     }
     // console.log(form_result);
     let jsonStringObj = JSON.stringify(form_result);
@@ -148,7 +154,7 @@ function json_serialize()
 
     // xhr object
     let xhr = new XMLHttpRequest();
-    // let url = "10.140.16.60:5000/user/signup"
+    // let url = "10.140.16"
     let url="";
     // open connection
     xhr.open("POST",url,true);
@@ -170,4 +176,35 @@ function json_serialize()
     // Sending data with the request
     xhr.send(jsonStringObj);
 
+}
+
+function switch_inputs()
+{
+    var from = document.getElementById("From").value;
+    var to = document.getElementById("To").value;
+
+    var temp = from;
+    from = to;
+    to = temp;
+
+    document.getElementById("From").value = from;
+    document.getElementById("To").value = to;
+}
+
+var switch_input = document.getElementById("switch_inputs")
+if (switch_input)
+{
+    document.getElementById("switch_inputs").addEventListener('click',switch_inputs)  
+}
+
+var next_page = document.getElementById("Next")
+if (next_page)
+{
+    document.getElementById('Next').addEventListener('click', nextPage)
+}
+
+var search_btn = document.getElementById("search-btn")
+if (search_btn)
+{
+    document.getElementById("search-btn").addEventListener('click',json_serialize)
 }
