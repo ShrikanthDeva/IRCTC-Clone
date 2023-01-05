@@ -55,8 +55,8 @@ img {
 .item
 {
     color: black;
-    padding: 20px;  
-    padding-left: 40px;
+    padding: 10px;  
+    margin-left: 40px;
 }
 .item:hover {
     border-bottom: 0px;
@@ -145,6 +145,7 @@ img {
     margin-left: 10px;
     padding-left: 25px;
     border: 2px solid;
+    font-size: medium;
 
 }
 .select-container
@@ -237,7 +238,7 @@ img {
 {
     position: absolute;
     left:28px;
-    top: 35px;
+    top: 36px;
     color: black;
 }
 .calender-icon
