@@ -97,9 +97,12 @@ img {
 {
     display: flex;
     justify-content: space-around;
+    margin-top: 30px ;
+    cursor: pointer;
 }
 .search-btn
 {
+    
     background-color: rgb(49 46 129);
     color: white;
     padding: 10px 20px;
@@ -122,10 +125,10 @@ img {
     
     background-color: white;
     box-shadow: 0px 0px 50px 0px black;
-    height: 365px;
-    width: 530px;
+    height: 450px;
+    width: 600px;
     margin-top: 150px;
-    margin-left: 360px;
+    margin-left: 340px;
     background-image: none;
     border-radius: 30px 30px 30px 30px;
 
@@ -136,12 +139,13 @@ img {
     flex-direction: row;
     justify-content: space-between 10px;
     padding: 40px;
+    margin-top: -20px;
 }
 
 .input-field 
 {
     height: 34px;
-    width: 150px;
+    width: 180px;
     margin-left: 10px;
     padding-left: 25px;
     border: 2px solid;
@@ -151,7 +155,7 @@ img {
 .select-container
 {
     height: 38px ;
-    width: 179px;
+    width: 209px;
     margin-left: 10px;
     padding-left: 25px;
     border: 2px solid;
@@ -159,7 +163,7 @@ img {
 }
 .input-icons-container-1
 {
-    width: 200px;
+    width: 240px;
     margin-left: 1px;
     padding: 10px;
     display: flex;
@@ -169,7 +173,7 @@ img {
 }
 .input-icons-container-2
 {
-    width: 200px;
+    width: 240px;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -178,7 +182,7 @@ img {
 }
 .input-icons-container-3
 {
-    width: 200px;
+    width: 240px;
     height: 28px;
     padding: 10px;
     padding-top: 30px;
@@ -189,7 +193,7 @@ img {
 }
 .input-icons-container-4
 {
-    width: 200px;
+    width: 240px;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -199,14 +203,14 @@ img {
 .select-date-container
 {
     height: 34px ;
-    width: 150px;
+    width: 175px;
     margin-left: 10px;
     padding-left: 30px;
     border: 2px solid;
 }
 .input-icons-container-5
 {
-    width: 200px;
+    width: 240px;
     padding: 10px;
     padding-top: 36px;
     display: flex;
@@ -216,8 +220,7 @@ img {
 }
 .check-box
 {
-    padding-top: 35px;
-    padding-left: 20px;
+    padding-left: 200px;
     font-size:15px;
 }
 
@@ -230,7 +233,7 @@ img {
 }
 .switch-icon
 {
-    margin-left: 90px;
+    margin-left: 110px;
     height: 20px;
     width: 20px;
 }
@@ -257,6 +260,14 @@ img {
     height: 10px;
     width: 100px;
     padding-top: 10px;
+
+}
+
+#status2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    color: red;
 
 }
 

@@ -12,10 +12,11 @@ const nextPage = () => {
 const prevPage = () => {
     console.log('Hi')
 
-    document.getElementById('password').classList.add('move-reverse')
-    document.getElementById('password').classList.add('animation-delay')
-    document.getElementById('username').classList.add('animation-delay')
-    document.getElementById('username').classList.add('move-reverse')
+    document.getElementById('username').classList.remove('move-out-left')
+    document.getElementById('username').classList.remove('move-in-right')
+    document.getElementById('username').classList.add('move-in-right')
+    document.getElementById('password').classList.remove('move-in-left')
+    document.getElementById('password').classList.add('move-out-right')
 
     // Remove Back Button
     const back = document.getElementById('Back')
@@ -38,17 +39,28 @@ const removeUsernameField = () => {
 }
 
 const addMoveOutTransitionEffect = () => {
-    document.getElementById('username').classList.remove('move-out')
-    document.getElementById('username').classList.remove('move-reverse')
-    document.getElementById('username').classList.add('move-out')
+    // document.getElementById('username').classList.remove('move-out-left')
+    // document.getElementById('username').classList.remove('animation-delay')
+    // document.getElementById('username').classList.remove('move-reverse')
+    document.getElementById('username').classList.remove('move-in-right')
+    document.getElementById('username').classList.add('move-out-left')
+
+
     // console.log(document.getElementById('username').classList)
 }
 
 const addMoveInTransitionEffect = () => {
-    document.getElementById('password').classList.add('move-in')
+    document.getElementById('password').classList.remove('move-out-right')
+    document.getElementById('password').classList.remove('move-in-left')
+    document.getElementById('password').classList.add('move-in-left')
 }
 
 const addPasswordField = () => {
+
+    if (document.getElementById('password')) {
+        console.log("Element already exists")
+        return
+    }
     const password = document.createElement('input')
     password.type = 'password';
     password.name = "password";
@@ -56,6 +68,7 @@ const addPasswordField = () => {
     password.placeholder = "Enter password";
     
     document.getElementById('credentials-form').appendChild(password)
+    
 }
 
 const addButton = (buttonType, pathForSvg) => {
@@ -109,15 +122,72 @@ const addSubmitButton = () => {
     button.id = "submit"
     button.type = "submit"
     button.value = "Submit"
-    button.setAttribute('form', 'credentials-form')
+    // button.setAttribute('form', 'credentials-form')
     button.innerHTML = 'Submit'
 
     document.getElementById('button-container').appendChild(button)
     document.getElementById('button-container').classList.add('justify-space-between')
 }
 
+const sendFormData = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://10.140.16.42:5000/user/login"); 
+
+    // This fires up when the connection is successful
+    xhr.onload = function(event){ 
+        // alert("Success, server responded with: " + event.target.response);
+        localStorage.clear() 
+        const dataa = JSON.parse(xhr.response)
+        localStorage.setItem("token", dataa.token)
+
+        displayStatus()
+        console.log(xhr.response)
+    }; 
+
+    var formData = new FormData(document.getElementById("credentials-form")); 
+    xhr.send(formData);
+}
+
+const displayStatus = () => {
+    const res = localStorage.getItem("token")
+    console.log(res)
+    const status = JSON.parse(res)
+
+    if (document.getElementById('status')) {
+        const displayMessage = document.getElementById('status')
+        displayMessage.parentNode.removeChild(displayMessage)
+    }
+        const newNode = document.createElement('p')
+        newNode.id = 'status'
+        newNode.classList.add('shake') 
+    
+        const displayText = document.createTextNode(status)
+        newNode.appendChild(displayText)
+    
+        const buttons = document.getElementById('button-container')   
+        const parent = buttons.parentNode
+    
+        parent.insertBefore(newNode, buttons)
+
+}
+
+var next_pg = document.getElementById('Next')
+if (next_pg)
+{
+    document.getElementById('Next').addEventListener('click', nextPage)
+}
 
 
+
+// This is because the normal event listener gets clicked automatically from the Next button because they are in the same position. Cannot use "document.getElementById('submit').addEventListener('click', sendFormData())"
+document.addEventListener( "click", someListener );
+
+function someListener(event){
+    var element = event.target;
+    if(element.id == 'submit' && element.type == "submit"){
+        sendFormData()
+    }
+}
 
 // details page js
 
@@ -129,53 +199,89 @@ if (date_pick)
     document.getElementById("datePickerId").valueAsDate = new Date()
 }
 
+// function display missing fields
+function displayStatus2()
+{
+    var from = document.getElementById("From").value;
+    var to = document.getElementById("To").value;
+    if (from == "" || to == "")
+    {
+        var status2 = document.getElementById('status2') 
+        if (status2) {
+            const displayMessage = document.getElementById('status2')
+            displayMessage.parentNode.removeChild(displayMessage)
+        }
+        
+        var status2 = "*Missing Fields"
+        const newNode = document.createElement('p')
+        newNode.id = 'status2'
+        newNode.classList.add('shake') 
+    
+        const displayText = document.createTextNode(status2)
+        newNode.appendChild(displayText)
+    
+        const buttons = document.getElementById('search')   
+        const parent = buttons.parentNode
+        parent.insertBefore(newNode, buttons)
+        return false
+               
+    }
+    var status2 = document.getElementById('status2') 
+    if (status2) {
+        const displayMessage = document.getElementById('status2')
+        displayMessage.parentNode.removeChild(displayMessage)
+    }
+    return true
+}
 
 // form to json serialize
 function json_serialize()
 {
 
-    let form_result = {}
-    form_result.trainfrom = document.getElementById("From").value;    
-    form_result.trainto = document.getElementById("To").value;    
-    form_result.type = document.getElementById("TicketType").value;    
-    form_result.class = document.getElementById("TicketClass").value;    
-    form_result.date = document.getElementById("datePickerId").value;  
-    if (document.getElementById("AvailableTrain").checked)  
+    let val =  displayStatus2();
+    if (val)
     {
-        form_result.trainavailable = document.getElementById("AvailableTrain").value;  
-    }
-    else
-    {
-        form_result.AvailableTrain = "no";
-    }
-    // console.log(form_result);
-    let jsonStringObj = JSON.stringify(form_result);
-    console.log(jsonStringObj);
-
-    // xhr object
-    let xhr = new XMLHttpRequest();
-    // let url = "10.140.16"
-    let url="";
-    // open connection
-    xhr.open("POST",url,true);
-    // set the request header
-    xhr.setRequestHeader("Content-Type", "application/json");
-    // Create a state change callback
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-
-            // Print received data from server
-            result.innerHTML = this.responseText;
-
+        let form_result = {}
+        form_result.trainfrom = document.getElementById("From").value;    
+        form_result.trainto = document.getElementById("To").value;    
+        form_result.type = document.getElementById("TicketType").value;    
+        form_result.class = document.getElementById("TicketClass").value;    
+        form_result.date = document.getElementById("datePickerId").value;  
+        if (document.getElementById("AvailableTrain").checked)  
+        {
+            form_result.trainavailable = document.getElementById("AvailableTrain").value;  
         }
-    };
+        else
+        {
+            form_result.AvailableTrain = "no";
+        }
+        // console.log(form_result);
+        let jsonStringObj = JSON.stringify(form_result);
+        console.log(jsonStringObj);
+        console.log(localStorage.getItem("token"))
 
-    // Converting JSON data to string
-    // var data = JSON.stringify({ "name": name.value, "email": email.value });
-
-    // Sending data with the request
-    xhr.send(jsonStringObj);
-
+        fetch('http://10.140.11.221:5000/user/home', {
+    
+        method: 'POST', // or 'PUT'
+        headers: {    
+            'Authorization':'Bearer '+localStorage.getItem("token"),
+                'Accept': 'application/json,text/plain,/',
+                'Content-Type': 'application/json'      
+            },
+            body: jsonStringObj
+    
+        }).then((response) => response.json())
+        .then((data) => {
+            
+                
+                
+                console.log(data)
+            })
+            .catch((error) => {
+                console.dir('Error:', error);
+        });
+        
+    }
 }
 
 function switch_inputs()
@@ -189,7 +295,13 @@ function switch_inputs()
 
     document.getElementById("From").value = from;
     document.getElementById("To").value = to;
+
+
+
+        
 }
+    
+
 
 var switch_input = document.getElementById("switch_inputs")
 if (switch_input)
@@ -197,14 +309,10 @@ if (switch_input)
     document.getElementById("switch_inputs").addEventListener('click',switch_inputs)  
 }
 
-var next_page = document.getElementById("Next")
-if (next_page)
-{
-    document.getElementById('Next').addEventListener('click', nextPage)
-}
 
-var search_btn = document.getElementById("search-btn")
+var search_btn = document.getElementById("search")
 if (search_btn)
 {
-    document.getElementById("search-btn").addEventListener('click',json_serialize)
+    document.getElementById("search").addEventListener('click',json_serialize)    
+    
 }

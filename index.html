@@ -38,7 +38,7 @@
                             <div class="icon">
                                 <i class="fa-solid fa-location-dot"></i> 
                             </div>                                              
-                            <input class="input-field" type="text" id="From" name="From" placeholder="From">
+                            <input class="input-field" type="text" id="From" name="From" placeholder="From" oninput="this.value = this.value.toUpperCase()">
                         </div>
                         
                         <!-- switch icon -->
@@ -53,7 +53,7 @@
                                 <i class="fa-solid fa-location-arrow" ></i>
                             </div>
                             
-                            <input class="input-field" type="text" id="To" name="To" placeholder="To">
+                            <input class="input-field" type="text" id="To" name="To" placeholder="To" oninput="this.value = this.value.toUpperCase()">
                         </div>
         
                         <!-- Ticket Type -->
@@ -99,26 +99,28 @@
                             
                             <input class="select-date-container" type="date" id="datePickerId" name="date"/><br>
                         </div>
-
-                        <!-- Available berth check box -->
-                        <div class="check-box">
-                            <input type="checkbox" id="AvailableTrain"  name="AvailableTrain" value="yes" checked=false>
-                            <label for="AvailableTrain">Train with Available Berth</label>
-                        </div>
                         
                     </div>      
                     
                 </form>
 
-
-                <!-- search -->
-                <div class="search">                    
-                    <div class="search-btn">
-                        <i id="search-icon" class="fa-solid fa-magnifying-glass fa-l"></i>
-                        <p>Submit</p>
-                    </div>                    
+                <!-- Available berth check box -->
+                <div class="check-box">
+                    <input type="checkbox" id="AvailableTrain"  name="AvailableTrain" value="yes" checked=false>
+                    <label for="AvailableTrain">Train with Available Berth</label>
                 </div>
 
+
+                <!-- search -->
+                <div id="search-contianer">
+                    <div id="search" class="search">                    
+                        <div class="search-btn">
+                            <i id="search-icon" class="fa-solid fa-magnifying-glass fa-l"></i>
+                            <p>Submit</p>
+                        </div>                    
+                    </div>
+                </div>
+                
                 
         
 
