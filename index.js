@@ -274,8 +274,9 @@ function json_serialize()
         .then((data) => {
             
                 
-                
+                localStorage.setItem("response",data)
                 console.log(data)
+                showdata()
             })
             .catch((error) => {
                 console.dir('Error:', error);
@@ -283,6 +284,17 @@ function json_serialize()
         
     }
 }
+
+function showdata()
+{
+    let data  = localStorage.getItem("response")
+    const newNode = createElement("p")
+    newNode.id = "data"
+    const displayText = document.createTextNode(data)
+    
+
+}
+
 
 function switch_inputs()
 {
@@ -295,10 +307,7 @@ function switch_inputs()
 
     document.getElementById("From").value = from;
     document.getElementById("To").value = to;
-
-
-
-        
+       
 }
     
 
