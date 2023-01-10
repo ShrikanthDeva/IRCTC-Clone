@@ -131,17 +131,17 @@ const addSubmitButton = () => {
 
 const sendFormData = () => {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://10.140.16.42:5000/user/login"); 
+    xhr.open("POST", "http://192.168.43.203:5000/user/login"); 
 
     // This fires up when the connection is successful
     xhr.onload = function(event){ 
         // alert("Success, server responded with: " + event.target.response);
         localStorage.clear() 
+        localStorage.setItem('response', xhr.response)
         const dataa = JSON.parse(xhr.response)
         localStorage.setItem("token", dataa.token)
-
+        console.log(dataa.token)
         displayStatus()
-        console.log(xhr.response)
     }; 
 
     var formData = new FormData(document.getElementById("credentials-form")); 
@@ -149,9 +149,10 @@ const sendFormData = () => {
 }
 
 const displayStatus = () => {
-    const res = localStorage.getItem("token")
-    console.log(res)
-    const status = JSON.parse(res)
+    const res = localStorage.getItem('response')
+    const token = localStorage.getItem("token")
+    console.log(token)
+    const status = JSON.parse(res).status
 
     if (document.getElementById('status')) {
         const displayMessage = document.getElementById('status')
@@ -171,12 +172,7 @@ const displayStatus = () => {
 
 }
 
-var next_pg = document.getElementById('Next')
-if (next_pg)
-{
-    document.getElementById('Next').addEventListener('click', nextPage)
-}
-
+document.getElementById('Next').addEventListener('click', nextPage)
 
 
 // This is because the normal event listener gets clicked automatically from the Next button because they are in the same position. Cannot use "document.getElementById('submit').addEventListener('click', sendFormData())"
@@ -187,141 +183,4 @@ function someListener(event){
     if(element.id == 'submit' && element.type == "submit"){
         sendFormData()
     }
-}
-
-// details page js
-
-// min date fixer for calender
-var date_pick = document.getElementById("datePickerId")
-if (date_pick)
-{
-    datePickerId.min = new Date().toISOString().split("T")[0];
-    document.getElementById("datePickerId").valueAsDate = new Date()
-}
-
-// function display missing fields
-function displayStatus2()
-{
-    var from = document.getElementById("From").value;
-    var to = document.getElementById("To").value;
-    if (from == "" || to == "")
-    {
-        var status2 = document.getElementById('status2') 
-        if (status2) {
-            const displayMessage = document.getElementById('status2')
-            displayMessage.parentNode.removeChild(displayMessage)
-        }
-        
-        var status2 = "*Missing Fields"
-        const newNode = document.createElement('p')
-        newNode.id = 'status2'
-        newNode.classList.add('shake') 
-    
-        const displayText = document.createTextNode(status2)
-        newNode.appendChild(displayText)
-    
-        const buttons = document.getElementById('search')   
-        const parent = buttons.parentNode
-        parent.insertBefore(newNode, buttons)
-        return false
-               
-    }
-    var status2 = document.getElementById('status2') 
-    if (status2) {
-        const displayMessage = document.getElementById('status2')
-        displayMessage.parentNode.removeChild(displayMessage)
-    }
-    return true
-}
-
-// form to json serialize
-function json_serialize()
-{
-
-    let val =  displayStatus2();
-    if (val)
-    {
-        let form_result = {}
-        form_result.trainfrom = document.getElementById("From").value;    
-        form_result.trainto = document.getElementById("To").value;    
-        form_result.type = document.getElementById("TicketType").value;    
-        form_result.class = document.getElementById("TicketClass").value;    
-        form_result.date = document.getElementById("datePickerId").value;  
-        if (document.getElementById("AvailableTrain").checked)  
-        {
-            form_result.trainavailable = document.getElementById("AvailableTrain").value;  
-        }
-        else
-        {
-            form_result.AvailableTrain = "no";
-        }
-        // console.log(form_result);
-        let jsonStringObj = JSON.stringify(form_result);
-        console.log(jsonStringObj);
-        console.log(localStorage.getItem("token"))
-
-        fetch('http://10.140.11.221:5000/user/home', {
-    
-        method: 'POST', // or 'PUT'
-        headers: {    
-            'Authorization':'Bearer '+localStorage.getItem("token"),
-                'Accept': 'application/json,text/plain,/',
-                'Content-Type': 'application/json'      
-            },
-            body: jsonStringObj
-    
-        }).then((response) => response.json())
-        .then((data) => {
-            
-                
-                localStorage.setItem("response",data)
-                console.log(data)
-                showdata()
-            })
-            .catch((error) => {
-                console.dir('Error:', error);
-        });
-        
-    }
-}
-
-function showdata()
-{
-    let data  = localStorage.getItem("response")
-    const newNode = createElement("p")
-    newNode.id = "data"
-    const displayText = document.createTextNode(data)
-    
-
-}
-
-
-function switch_inputs()
-{
-    var from = document.getElementById("From").value;
-    var to = document.getElementById("To").value;
-
-    var temp = from;
-    from = to;
-    to = temp;
-
-    document.getElementById("From").value = from;
-    document.getElementById("To").value = to;
-       
-}
-    
-
-
-var switch_input = document.getElementById("switch_inputs")
-if (switch_input)
-{
-    document.getElementById("switch_inputs").addEventListener('click',switch_inputs)  
-}
-
-
-var search_btn = document.getElementById("search")
-if (search_btn)
-{
-    document.getElementById("search").addEventListener('click',json_serialize)    
-    
 }

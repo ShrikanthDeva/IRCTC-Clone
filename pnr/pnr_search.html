@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>PNR PAGE</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../styles/pnr.css">
+    </head>
+    <body>
+        <div class="container">
+            <img class="img_config_1" src="../img/logo copy.png" alt="logo">
+            <p class="middle">
+                <b>INDIAN RAILWAYS PASSENGER RESERVATION ENQUIRY</b>
+            </p>
+        
+            <img class="img_config_2" src="../img/logo2.png" alt="logo2">
+        </div>
+        <marquee id="markquee_1" behavior="" direction="left">
+            please help indian railways and government of india in moving towards a digitized and cashless economy. Eradicate black money.
+        </marquee>
+        
+        <div class="mainborder">
+            <div class="divelement">
+                <h1>PNR STATUS SEARCH</h1>
+            </div>
+            <p>
+                Enter the PNR for your booking below to get the current status. You will find it on the top left corner of the ticket.
+            </p>
+
+            <form id="Form">
+                    <div class="center_pnr_status_entry">
+                        <p><b>Enter PNR no.</b></p>
+                        <input type="text" id="pnr_input" maxlength="10" minlength="10" class="input_text"  placeholder="PNR"  required>
+                    </div>
+                    <input type="submit" id="submit_button"  class="sub_btn" value="Submit">
+                    
+            </form>
+        </div>
+
+        <script src="../scripts/pnr_search.js"></script>
+    </body>
+</html>
+
