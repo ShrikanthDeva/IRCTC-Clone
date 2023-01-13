@@ -131,7 +131,7 @@ const addSubmitButton = () => {
 
 const sendFormData = () => {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://192.168.43.203:5000/user/login"); 
+    xhr.open("POST", "http://192.168.7.203:5000/user/login"); 
 
     // This fires up when the connection is successful
     xhr.onload = function(event){ 

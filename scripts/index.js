@@ -66,7 +66,7 @@ function json_serialize()
         let jsonStringObj = JSON.stringify(form_result);
         console.log(jsonStringObj);
         console.log("from+index.js "+localStorage.getItem("token"))
-        let url = "http://192.168.43.203:5000/"
+        let url = "http://192.168.7.203:5000/"
 
         fetch(url+'user/home', {
     
@@ -84,6 +84,15 @@ function json_serialize()
                 
                 localStorage.setItem("response",data)
                 console.log(data)
+                if(data)
+                {
+                    displayTrains(data)
+                }
+                else
+                {
+                    displayNoresult()
+                }
+                
                 // console.log(data[0]['time'])
                 // localStorage.setItem('time',data[0]['time'])
                 // window.location.href="/trains.html"
@@ -141,4 +150,67 @@ if (search_btn)
 {
     document.getElementById("search").addEventListener('click',json_serialize)    
     
+}
+
+function displayTrains(data)
+{
+    data.forEach(ele => { 
+        let train = document.createElement("div")
+        train.classList.add("train")
+
+        // trainname trainid duration starttime startdate trainfrom trainto enddate endtime
+        
+        // top
+        let top = document.createElement("div")
+        top.classList.add("top")
+
+        let train_name = document.createElement("p")
+        train_name.innerHTML = ele["trainname"]
+        let train_id = document.createElement("p")
+        train_id.innerHTML = ele["trainid"]
+        top.appendChild(train_name)
+        top.appendChild(train_id)
+
+        // bottom
+
+        // start
+        let bottom = document.createElement("div")
+        top.classList.add("bottom")
+
+        let start_time = document.createElement("p")
+        train_from.innerHTML = ele["starttime"]
+        let train_from = document.createElement("p")
+        train_from.innerHTML = ele["trainfrom"]
+        let start_date = document.createElement("p")
+        train_from.innerHTML = ele["startdate"]
+
+        // duration
+        let duration = document.createElement("p")
+        duration.innerHTML = ele["duration"]
+
+        // to
+        let end_time = document.createElement("p")
+        train_from.innerHTML = ele["endtime"]
+        let train_to = document.createElement("p")
+        train_to.innerHTML = ele["trainto"]
+        let end_date = document.createElement("p")
+        train_from.innerHTML = ele["enddate"]
+
+
+        bottom.appendChild(start_time)
+        bottom.appendChild(train_from)
+        bottom.appendChild(start_date)
+        bottom.appendChild(duration)
+        bottom.appendChild(end_time)
+        bottom.appendChild(train_to)
+        bottom.appendChild(end_date)
+
+
+
+        train.appendChild(top)
+        train.appendChild(bottom)
+
+        document.querySelector("trains").appendChild(train)
+
+    });
 }
